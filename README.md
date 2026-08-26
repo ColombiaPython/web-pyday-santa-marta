@@ -4,7 +4,13 @@ Página web del evento **PyDay Santa Marta 2027 & Humble Data** — 12 y 13 de f
 Santa Marta, Magdalena, Colombia.
 
 Sitio estático de un solo archivo (`index.html`), sin build ni dependencias.
-Pensado para publicarse con **GitHub Pages** en `https://santamarta.pyday.co`.
+
+**En vivo:** https://vivianarodriguezlan.github.io/web-pyday-santa-marta/
+
+> El dominio definitivo será `santamarta.pyday.co`. El archivo `CNAME` se quitó a propósito:
+> mientras el DNS no esté configurado, tener el dominio personalizado puesto hace que GitHub
+> redirija el enlace `.github.io` a un dominio que no resuelve, y la página queda inaccesible.
+> Ver *Mudarse a santamarta.pyday.co* más abajo.
 
 ## Por qué existe este repo
 
@@ -72,20 +78,31 @@ el Caribe colombiano.
 Todo respeta `prefers-reduced-motion: reduce`: con esa preferencia activa, nada se anima
 y el contenido aparece de una vez.
 
-## Publicar con GitHub Pages
+## Publicación actual
 
-1. Sube estos archivos a la raíz de la rama `main` del repo.
-2. **Settings → Pages → Build and deployment**: Source = *Deploy from a branch*,
-   Branch = `main`, carpeta = `/ (root)`.
-3. En **Custom domain** escribe `santamarta.pyday.co` y guarda. El archivo `CNAME` ya está
-   en el repo, así que el campo debería aparecer lleno.
-4. En el DNS de `pyday.co`, crea un registro **CNAME**:
+Ya está configurado: **Settings → Pages**, Source = *Deploy from a branch*, branch `main`,
+carpeta `/ (root)`. Cada push a `main` republica el sitio en un par de minutos.
 
-   | Tipo  | Nombre       | Valor                        |
-   |-------|--------------|------------------------------|
-   | CNAME | `santamarta` | `<usuario-u-org>.github.io.` |
+## Mudarse a santamarta.pyday.co
 
-5. Espera a que GitHub valide el dominio y marca **Enforce HTTPS**.
+El orden importa. Si se pone el dominio antes que el DNS, la página se cae hasta que el DNS
+propague.
+
+1. **Primero el DNS.** En el proveedor de `pyday.co`, crear un registro **CNAME**:
+
+   | Tipo  | Nombre       | Valor                             |
+   |-------|--------------|-----------------------------------|
+   | CNAME | `santamarta` | `vivianarodriguezlan.github.io.`  |
+
+   (con el punto final)
+
+2. **Después GitHub.** Cuando el registro propague, en **Settings → Pages → Custom domain**
+   escribir `santamarta.pyday.co` y guardar. GitHub vuelve a crear el archivo `CNAME` en el
+   repo por su cuenta — si eso pasa, hacer `git pull` antes del siguiente push.
+
+3. Esperar a que desaparezca el aviso de *DNS check* y marcar **Enforce HTTPS**.
+
+4. Actualizar la URL en la respuesta a la PSF y en el resto de enlaces.
 
 ## Qué falta por completar
 
